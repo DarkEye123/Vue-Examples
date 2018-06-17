@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-xs-12 col-sm-8 col-sm-offset-4">
+      <div class="col-xs-12 col-sm-6 mx-auto">
         <user></user>
       </div>
     </div>
