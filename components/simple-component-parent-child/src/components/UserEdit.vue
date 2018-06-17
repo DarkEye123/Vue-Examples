@@ -12,6 +12,6 @@
 
 <style scoped>
   div {
-    background-color: green;
+    background-color: lightgoldenrodyellow;
   }
 </style>
