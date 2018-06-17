@@ -4,7 +4,8 @@
     <p>Many Details</p>
     <p>Current username: {{ sharedName }}</p>
     <hr>
-    <button @click="fireEvent()">Change the name</button>
+    <button @click="fireEvent()">Change the name by event</button>
+    <button @click="parentMethod()">Change the name by callback</button>
    </div>
 </template>
 
@@ -13,6 +14,7 @@
     // props: ['sharedName']
     props: {
       sharedName: String,
+      parentMethod: Function
     },
     methods: {
       fireEvent() {
