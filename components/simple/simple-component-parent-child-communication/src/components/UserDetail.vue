@@ -18,8 +18,7 @@
     },
     methods: {
       fireEvent() {
-        this.sharedName = "changedFromChild"
-        this.$emit("nameChange", this.sharedName)
+        this.$emit("nameChange", "name changed by event")
       }
     }
 
