@@ -6,13 +6,18 @@
           <h1>{{ title }}</h1>
           <p>A wonderful body!</p>
         </app-quote>
+        <app-quote-named>
+          <h1 slot="titledSlot">{{ title }}</h1>
+          <p slot="content">A wonderful body of titled slot!</p>
+        </app-quote-named>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import Quote from './components/Quote';
+  import Quote from './components/Quote-slot';
+  import QuoteNamedSlot from './components/Quote-slot-named';
   export default {
     data() {
       return {
@@ -20,7 +25,8 @@
       }
     },
     components: {
-      appQuote: Quote
+      appQuote: Quote,
+      appQuoteNamed: QuoteNamedSlot
     }
   };
 </script>
