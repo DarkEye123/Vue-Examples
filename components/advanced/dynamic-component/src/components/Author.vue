@@ -6,7 +6,9 @@
 
 <script>
 export default {
-    
+    destroyed() {
+        console.log("Author destroyed")
+    }
 }
 </script>
 
