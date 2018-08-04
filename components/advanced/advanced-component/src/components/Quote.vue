@@ -19,5 +19,9 @@ export default {
         margin: 30px 10em auto;
         text-align: center;
     }
+    /* h1 is given in the parent */
+    h1 {
+        color: red
+    }
 </style>
 

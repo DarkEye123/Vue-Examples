@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-xs-12 col-sm-6 mx-auto">
         <app-quote>
-          <h1>A wonderful quote!</h1>
+          <h1>{{ title }}</h1>
           <p>A wonderful body!</p>
         </app-quote>
       </div>
@@ -14,6 +14,11 @@
 <script>
   import Quote from './components/Quote';
   export default {
+    data() {
+      return {
+        title: "A wonderful quote!"
+      }
+    },
     components: {
       appQuote: Quote
     }
