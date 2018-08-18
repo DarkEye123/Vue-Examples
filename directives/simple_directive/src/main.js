@@ -3,10 +3,14 @@ import App from './App.vue';
 
 Vue.directive('highlight', {
     bind(el, binding, vnode) {
-        if (!binding.value) {
-            el.style.backgroundColor = 'lightgreen';
+        if (binding.arg == 'textColor') {
+            el.style.color = binding.value;
         } else {
-            el.style.backgroundColor = binding.value;
+            if (!binding.value) {
+                el.style.backgroundColor = 'lightgreen';
+            } else {
+                el.style.backgroundColor = binding.value;
+            }
         }
     }
 });
