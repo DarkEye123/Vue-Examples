@@ -9,14 +9,14 @@
   </div>
 </template>
 
-<script>
+<script script="ts">
 export default {
   directives: {
     "local-highlight": {
       bind(el, binding, vnode) {
         let delay = binding.value["delayed"] || 0;
         let currentColor = binding.value["color"] || "lightblue";
-        let nextColor = binding.value["tcolor"] || 'red';
+        let nextColor = binding.value["tcolor"] || "red";
         el.style.color = currentColor;
         if (binding.modifiers["blink"]) {
           let previousColor = currentColor;
