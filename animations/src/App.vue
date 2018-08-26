@@ -13,43 +13,43 @@
               A simple example of fading
             </div>
           </transition>
-
+  
           <transition name="slide" appear>
             <div class="alert alert-info text-center" role="alert" v-if="isContentVisible" type="animation">
               A simple example of sliding
             </div>
           </transition>
-
+  
           <transition name="combo" appear>
             <div class="alert alert-dark text-center" role="alert" v-if="isContentVisible" type="animation">
               A simple example of sliding & fading
             </div>
           </transition>
-
+  
           <transition appear enter-active-class="animated bounce" leave-active-class="animated fade">
             <div class="alert alert-warning text-center" role="alert" v-if="isContentVisible">
               A simple example of custom animation classes
             </div>
           </transition>
-
+  
           <hr>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text" for="alertSelect">Options</label>
             </div>
             <select v-model="alertName" class="custom-select" id="alertSelect">
-                <option value="fade">fade animation</option>
-                <option value="slide">slide animation</option>
-              </select>
+                    <option value="fade">fade animation</option>
+                    <option value="slide">slide animation</option>
+                  </select>
           </div>
-
+  
           <br>
           <transition :name="alertName" appear>
             <div class="alert alert-danger text-center" role="alert" v-if="isContentVisible" type="animation">
               A simple example of dynamic animation chosen by input
             </div>
           </transition>
-
+  
           <transition name="combo" appear mode="out-in">
             <!-- note the key which is mandatory - see https://vuejs.org/v2/guide/transitions.html#Transitioning-Between-Elements -->
             <div class="alert alert-primary text-center" role="alert" v-if="isContentVisible" key="1">
@@ -59,28 +59,32 @@
               A simple example of transition between elements | element 2
             </div>
           </transition>
-
+  
           <hr>
           <button @click="animate=!animate" class="btn btn-outline-primary btn-lg">toogle js animation</button>
           <br><br>
-          <transition
-            @before-enter="beforeEnter"
-            @enter="enter"
-            @leave="leave"
-            :css="false"
-            appear
-          >
+          <transition @before-enter="beforeEnter" @enter="enter" @leave="leave" :css="false" appear>
             <div style="width:100px; height:100px; background-color:lightgreen;" v-if="animate"></div>
           </transition>
-
+  
           <hr>
-
+  
           <button @click="selectedComponent == 'app-danger-component' ? selectedComponent='app-success-component' : selectedComponent='app-danger-component'" class="btn btn-outline-primary">toogle component switch</button>
           <br>
           <transition mode="out-in" enter-active-class="animated rubberBand">
             <component :is="selectedComponent" class="mt-3"></component>
           </transition>
-
+  
+          <hr>
+  
+          <button class="btn btn-primary mb-1" @click="addItem">add item</button>
+  
+          <ul class="list-group">
+            <transition-group style="cursor: pointer" enter-active-class="animated rubberBand" leave-active-class="animated rubberBand absolute" move-class="move-transition">
+              <li class="list-group-item" v-for="(item, index) in items" :key="item.id" @click="deleteItem(index)">{{item.val}}</li>
+            </transition-group>
+          </ul>
+  
         </div>
       </div>
     </div>
@@ -90,17 +94,43 @@
 <script>
 import DangerComponent from "./components/DangerAlert";
 import SuccessComponent from "./components/SuccessAlert";
+import uniqueId from "lodash.uniqueid";
 export default {
   data() {
     return {
-      visible: true,
+      visible: false,
       animate: true,
       componentSwitch: false,
       selectedComponent: "app-danger-component",
-      alertName: "fade"
+      alertName: "fade",
+      items: [
+        {
+          val: 1,
+          id: this.getId()
+        },
+        {
+          val: 2,
+          id: this.getId()
+        },
+        {
+          val: 3,
+          id: this.getId()
+        },
+        {
+          val: 4,
+          id: this.getId()
+        },
+        {
+          val: 5,
+          id: this.getId()
+        }
+      ]
     };
   },
   methods: {
+    getId() {
+      return uniqueId();
+    },
     beforeEnter(el) {
       console.log("beforeEnter");
       el.style.opacity = 0;
@@ -111,15 +141,47 @@ export default {
       console.log("Enter");
       Velocity(
         el,
-        { opacity: 1, width: "200px", height: "150px" },
-        { duration: 500 }
+        {
+          opacity: 1,
+          width: "200px",
+          height: "150px"
+        },
+        {
+          duration: 500
+        }
       );
-      Velocity(el, { width: "100px", height: "100px" }, { complete: done });
+      Velocity(
+        el,
+        {
+          width: "100px",
+          height: "100px"
+        },
+        {
+          complete: done
+        }
+      );
     },
     leave: function(el, done) {
       console.log("Leave");
-      Velocity(el, { translateX: "15px", rotateZ: "50deg" }, { duration: 600 });
-      Velocity(el, { rotateZ: "100deg" }, { loop: 2 });
+      Velocity(
+        el,
+        {
+          translateX: "15px",
+          rotateZ: "50deg"
+        },
+        {
+          duration: 600
+        }
+      );
+      Velocity(
+        el,
+        {
+          rotateZ: "100deg"
+        },
+        {
+          loop: 2
+        }
+      );
       Velocity(
         el,
         {
@@ -128,8 +190,27 @@ export default {
           translateX: "100px",
           opacity: 0
         },
-        { complete: done }
+        {
+          complete: done
+        }
       );
+    },
+    deleteItem(index) {
+      console.log("deleting: position", index, "value:", this.items[index]);
+      this.items.splice(index, 1);
+    },
+    addItem() {
+      let position = Math.floor(Math.random() * this.items.length);
+      console.log(
+        "generated position: ",
+        position,
+        "value:",
+        this.items.length + 1
+      );
+      this.items.splice(position, 0, {
+        val: this.items.length + 1,
+        id: this.getId()
+      });
     }
   },
   computed: {
@@ -191,6 +272,17 @@ export default {
 
 .combo-leave-to {
   opacity: 0;
+}
+
+.move-transition {
+  transition: transform 1s;
+}
+
+.absolute {
+  position: absolute;
+  /* see https://stackoverflow.com/questions/28144233/bootstrap-container-with-positionabsolute-loses-layout-inside#28145495 */
+  right: 0;
+  left: 0;
 }
 
 @keyframes slide-in {
