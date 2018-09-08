@@ -4,11 +4,8 @@
         <router-link class="nav-item nav-link" to="/" exact active-class="active">
             Home
         </router-link>
-        <router-link class="nav-item nav-link" to="/user/1" active-class="active">
-            User1
-        </router-link>
-        <router-link class="nav-item nav-link" to="/user/2" active-class="active">
-            User2
+        <router-link class="nav-item nav-link" to="/user" active-class="active">
+            User
         </router-link>
     </nav>
 </template>
