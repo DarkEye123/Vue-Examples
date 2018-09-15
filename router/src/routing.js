@@ -12,10 +12,12 @@ export const routes = [{
         component: UserStart
     }, {
         path: ':id',
-        component: UserDetail
+        component: UserDetail,
+        name: 'userDetail'
     }, {
         path: ':id/edit',
-        component: UserEdit
+        component: UserEdit,
+        name: 'userEdit'
     }]
 }, {
     path: '',
