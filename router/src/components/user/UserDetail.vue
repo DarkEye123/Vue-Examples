@@ -3,7 +3,7 @@
     <h3>Some User Details</h3>
     <p class="mt-3 text-right">Id from the URL: {{id}}</p>
     <router-link class="btn btn-primary mr-3" :to="'/user/' + $route.params.id + '/edit'">edit using naive routing</router-link>
-    <router-link class="btn btn-primary" :to="{name: 'userEdit', params:{id: id}}">edit using named route</router-link>
+    <router-link class="btn btn-primary" :to="{name: 'userEdit', params:{id: id}, query: {locale: 'en', cnt: 100}}">edit using named route</router-link>
   </div>
 </template>
 
