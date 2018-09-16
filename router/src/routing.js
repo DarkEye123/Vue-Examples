@@ -46,9 +46,15 @@ export const routes = [{
         name: 'userEdit'
     }]
 }, {
+    name: 'home',
     path: '',
     components: {
         default: Home,
         'view-top': Header
+    }
+}, {
+    path: '*',
+    redirect: { //can be direct path too '/trololo/something
+        name: 'home'
     }
 }];
